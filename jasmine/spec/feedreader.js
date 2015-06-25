@@ -69,7 +69,7 @@ $(function() {
           */
           it('displays when clicked and hides when clicked again', function() {
             $('.menuIcon').click();
-            expect('body').toBe('menu-hidden');
+            expect('body').not.toBe('menu-hidden');
           });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -81,13 +81,18 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
        */
+       beforeEach(function(done) {
+        $('a').click();
+           loadFeed(0,done);
+       });
         it('has at least one entry', function() {
-
+            expect(loadFeed[0]).toBeDefined();
         });
     });
     /* TODO: Write a new test suite named "New Feed Selection"*/
     describe('New Feed Selection', function() {
         beforeEach(function(done) {
+            $('.entry-link').click();
             loadFeed(0,done);
         });
         /* TODO: Write a test that ensures when a new feed is loaded
@@ -95,7 +100,7 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */    
          it('is successful aka content changes', function() {
-            loadFeed(0).not.toBe(loadFeed(1));
+            expect(loadFeed[0]).not.toEqual(loadFeed[1]);
          });
     });
 }());
