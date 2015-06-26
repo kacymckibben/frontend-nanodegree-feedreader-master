@@ -2,6 +2,9 @@
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.
 
+Instructions
+------------
+Open index.html in a browser. The jasmine folder contains the feedreader.js, the js folder contains the app.js, the css folder contains the css files, and the fonts folder contains the icomoon font files.
 
 ## Why this Project?
 
