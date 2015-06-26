@@ -70,10 +70,7 @@ $(function() {
           it('displays when clicked and hides when clicked again', function() {
             $('.menu-icon-link').trigger("click");
             expect($('body').hasClass('menu-hidden')).not.toBe(true);
-            /*expect('body').not.toBe('menu-hidden');*/
             $('.menu-icon-link').trigger("click");
-            /*expect('body').toBe('menu-hidden');
-            expect('menu-hidden').not.toHaveBeenCalledOn('body');*/
             expect($('body').hasClass('menu-hidden')).toBe(true);
           });
     });
