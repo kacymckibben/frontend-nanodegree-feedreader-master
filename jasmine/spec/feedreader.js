@@ -68,8 +68,13 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
           it('displays when clicked and hides when clicked again', function() {
-            $('.menuIcon').click();
-            expect('body').not.toBe('menu-hidden');
+            $('.menu-icon-link').trigger("click");
+            expect($('body').hasClass('menu-hidden')).not.toBe(true);
+            /*expect('body').not.toBe('menu-hidden');*/
+            $('.menu-icon-link').trigger("click");
+            /*expect('body').toBe('menu-hidden');
+            expect('menu-hidden').not.toHaveBeenCalledOn('body');*/
+            expect($('body').hasClass('menu-hidden')).toBe(true);
           });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -82,25 +87,31 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
        */
        beforeEach(function(done) {
-        $('a').click();
            loadFeed(0,done);
        });
         it('has at least one entry', function() {
-            expect(loadFeed[0]).toBeDefined();
+            expect($('.feed .entry').length>=1).toBe(true);
         });
     });
     /* TODO: Write a new test suite named "New Feed Selection"*/
     describe('New Feed Selection', function() {
+        var feedZero, feedOne;
         beforeEach(function(done) {
-            $('.entry-link').click();
-            loadFeed(0,done);
+            loadFeed(0, function() {
+                feedZero = $('.feed').html();
+            });
+            loadFeed(1, function() {
+                feedOne = $('.feed').html();
+                done();
+            })
         });
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */    
-         it('is successful aka content changes', function() {
-            expect(loadFeed[0]).not.toEqual(loadFeed[1]);
+         it('is successful aka content changes', function(done) {
+            expect(feedZero).not.toBe(feedOne);
+            done();
          });
     });
 }());
